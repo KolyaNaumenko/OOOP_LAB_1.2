@@ -122,6 +122,70 @@ public:
 		}
 	}
 
+	void WeekDay() {
+
+		string date;
+		string time;
+
+		cout << "Enter date (00.00.0000): ";
+		cin >> date;
+		time = "00:00:00";
+
+		system("cls");
+
+		strToInt(date, time, 0);
+
+		CTrue(0);
+
+		if (check2 == 1) {
+			secondday = 3;
+			secondmonth = 10;
+			secondyear = 2022;
+			secondhour = 0;
+			secondminute = 0;
+			secondsecond = 0;
+
+			toSec();
+			diference();
+			Get_Day();
+
+			cout << "Given date: " << date << "\n"
+				<< "The day of the week: " << TDay << "\n";
+
+		}
+		else {
+			cout << "Date entered incorrectly\n";
+		}
+	}
+
+	void WeekDay1() {
+
+		SYSTEMTIME st;
+
+		GetLocalTime(&st);
+
+		iday = st.wDay;
+		imonth = st.wMonth;
+		iyear = st.wYear;
+		ihour = 0;
+		iminute = 0;
+		isecond = 0;
+
+		secondday = 3;
+		secondmonth = 10;
+		secondyear = 2022;
+		secondhour = 0;
+		secondminute = 0;
+		secondsecond = 0;
+
+		toSec();
+		diference();
+		Get_Day();
+
+		cout << "Given date: " << st.wDay << "." << st.wMonth << "." << st.wYear << "\n"
+			<< "The day of the week: " << TDay << "\n";
+	}
+
 private:
 	bool check2;
 	bool check;
@@ -390,6 +454,42 @@ private:
 			}
 		}
 	}
+
+	void Get_Day() {
+
+		int key = 0;
+		string arr[7] = { "Monday", "Tuesday", "Wednasday", "Thursday", "Friday", "Saturday", "Sunday" };
+		if (resday == 0) {
+			TDay = arr[0];
+		}
+		if (check == 0) {
+			while (resday != 0) {
+
+				if (key == 0) {
+					resday -= 1;
+					key = 6;
+				}
+				else {
+					key -= 1;
+					resday -= 1;
+				}
+			}
+		}
+		else {
+			while (resday != 0) {
+
+				if (key == 6) {
+					resday -= 1;
+					key = 0;
+				}
+				else {
+					key += 1;
+					resday -= 1;
+				}
+			}
+		}
+		TDay = arr[key];
+	}
 };
 
 string M;
@@ -434,6 +534,29 @@ int main()
 		}
 		else if (M == "3") {
 			system("cls");
+
+			string state;
+			cout << "(1) For current date\n"
+				<< "(2) For given day\n"
+				<< "Your choice: ";
+			cin >> state;
+
+			system("cls");
+
+			if (state == "1") {
+				dt.WeekDay1();
+			}
+			else if (state == "2") {
+				dt.WeekDay();
+			}
+			else {
+				cout << "Error\n";
+
+				system("pause");
+				system("cls");
+				Menu();
+				system("cls");
+			}
 
 			system("pause");
 			system("cls");
